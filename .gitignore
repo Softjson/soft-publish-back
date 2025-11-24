@@ -1,0 +1,60 @@
+# -------------------------------------------------------------------
+# Archivo .gitignore para Python / FastAPI / PostgreSQL / SQLAlchemy
+# -------------------------------------------------------------------
+
+# 1. Entornos Virtuales (Venv / Conda / Pipenv)
+# -----------------------------------------------
+# Ignora la carpeta del entorno virtual de Python
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# 2. Archivos de Python Compilados
+# ----------------------------------
+# Caché bytecode
+__pycache__/
+
+# Archivos de distribución
+*.egg-info/
+.eggs/
+
+# 3. Datos y Configuración Sensible
+# ----------------------------------
+# Archivo de variables de entorno (contiene claves y contraseñas)
+.env
+*.pem
+*.key
+*.log
+logs/
+
+# 4. Archivos de Alembic / Migraciones
+# --------------------------------------
+# La carpeta de Alembic debe ser versionada, pero es bueno ignorar
+# archivos generados que no son esenciales, si los hubiera.
+# (Alembic por defecto no genera muchos archivos para ignorar)
+
+# 5. Herramientas de Desarrollo y IDEs
+# ------------------------------------
+# Visual Studio Code
+.vscode/
+
+# PyCharm
+.idea/
+
+# IPython / Jupyter
+.ipynb_checkpoints
+
+# 6. Salida de Tests (si usas cobertura de código)
+# ------------------------------------------------
+htmlcov/
+.coverage
+.cache
+
+# 7. Bases de Datos Locales (Si usaras SQLite temporalmente)
+# -----------------------------------------------------------
+*.db
+*.sqlite
+*.sqlite3
