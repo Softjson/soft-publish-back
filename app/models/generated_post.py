@@ -8,3 +8,4 @@ class GeneratedPost(Base):
     style = Column(String(50), nullable=False)
     content = Column(Text, nullable=False)
     created_at = Column(DateTime(timezone=True), server_default=func.now())
+    template_key = Column(String, nullable=False)

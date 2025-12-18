@@ -1,9 +1,10 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 
 class PostGenerateRequest(BaseModel):
-    topic: str
-    style: str = "Profesional y creativo"
+    topic: str = Field(..., min_length=3, max_length=100)
+    style: str = Field(default="profesional", max_length=50)
+    template: str = "instagram_post"
 
 class PostGenerateResponse(BaseModel):
     content: str

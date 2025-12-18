@@ -5,8 +5,7 @@ from app.db.session import get_db
 from app.models.generated_post import GeneratedPost
 from app.services.ai import generate_post
 from app.services.templates_service import (
-    build_prompt,
-    POST_TEMPLATE_INSTAGRAM
+    build_prompt
 )
 
 router = APIRouter()
@@ -22,7 +21,7 @@ def create_generated_post(data: PostGenerateRequest,db: Session = Depends(get_db
     """
 
     prompt = build_prompt(
-        template=POST_TEMPLATE_INSTAGRAM,
+        template_key=data.template,
         topic=data.topic,
         style=data.style
     )
@@ -32,7 +31,8 @@ def create_generated_post(data: PostGenerateRequest,db: Session = Depends(get_db
     post = GeneratedPost(
         topic=data.topic,
         style=data.style,
-        content=result
+        content=result,
+        template_key=data.template
     )
 
     db.add(post)
