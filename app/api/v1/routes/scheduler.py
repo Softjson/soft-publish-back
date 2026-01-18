@@ -11,7 +11,7 @@ from app.schemas.scheduled_post import (
     ScheduledPostCreate,
     ScheduledPostResponse
 )
-
+allowed_platforms = {"facebook", "instagram","linkedin"}
 router = APIRouter(prefix="/scheduler", tags=["scheduler"])
 
 @router.post("/",response_model=ScheduledPostResponse, status_code=status.HTTP_201_CREATED)
@@ -24,9 +24,12 @@ def schedule_post(payload: ScheduledPostCreate,db: Session = Depends(get_db)):
     if payload.scheduled_at <= datetime.utcnow():
         raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Scheduled time must be in the future.")
     
+    if payload.platform.lower() not in allowed_platforms:
+        raise HTTPException(status_code=status.HTTP_400_BAD_REQUEST,detail="Unsupported platform.")
+    
     scheduled_post = ScheduledPost(
         generated_post_id = payload.generated_post_id,
-        platform = payload.platform,
+        platform = payload.platform.lower(),
         scheduled_at = payload.scheduled_at,
         status = "pending"
     )
